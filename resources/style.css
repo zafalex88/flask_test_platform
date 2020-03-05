@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    margin: auto;
+}
+
+body {
+    font-family: "Merriweather";
+    background-image: url("./back3.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#navigation a {
+    text-decoration: none;
+    color: #073e92;
+}
+
+#navigation a:hover {
+    color: #fff;
+}
+
+#navigation {
+    height: 40px;
+    width: 100%;
+    background-color: rgb(209, 209, 209);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Trade Winds";
+}
+
+#navigation li {
+    display: inline-block;
+    width: 150px;
+    padding: 5px 5px 0px 0px;
+    font-weight: bold;
+}
+
+.login,
+.registration {
+    width: 400px;
+    background-color: #fff;
+    margin-top: 100px;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.9);
+}
+
+.login h1,
+.registration h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 26px;
+    padding: 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+
+.login .links,
+.registration .links {
+    display: flex;
+    padding-top: 15px;
+}
+
+.login .links a,
+.registration .links a {
+    color: #adb2ba;
+    display: inline-flex;
+    padding: 0 10px 10px 10px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login .links a.active,
+.registration .links a.active {
+    border-bottom: 3px solid #3274d6;
+    color: #39393a;
+}
+
+.login .links a:hover,
+.registration .links a:hover {
+    color: #000000;
+}
+
+.loginform,
+.registrationform {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.loginform input[type="password"],
+.loginform input[type="text"],
+.registrationform input[type="password"],
+.registrationform input[type="text"],
+.registrationform input[type="email"] {
+    width: 300px;
+    height: 50px;
+    border: 1px solid #d8d8d8;
+    margin: auto 50px 25px 50px;
+    padding: 0 15px;
+    align-items: middle;
+    align-content: middle;
+    text-align: center;
+}
+
+.loginform input[type="submit"],
+.registrationform input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: #073e92;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+}
+
+.loginform input[type="submit"]:hover,
+.registrationform input[type="submit"]:hover {
+    background-color: rgb(235, 235, 235);
+    color: black;
+}
+
+footer {
+    margin: 100px;
+    padding: 4rem 0;
+    font-size: 1em;
+    color: #ffffff;
+    text-align: center;
+}
