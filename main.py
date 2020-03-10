@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
@@ -10,7 +10,6 @@ app.config['MYSQL_HOST'] = 'Alex-PC'
 app.config['MYSQL_USER'] = 'alex'
 app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'flask_test_1'
-app.config["MYSQL_DATABASE_CURSORCLASS"] = "DictCursor"
 app.secret_key = 'my_secret_key'
 
 #mysql initialization
@@ -26,7 +25,8 @@ def signin():
         username = request.form['username']
         password = request.form['password']
         # Check if account exists using MySQL
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cnx = mysql.connector.connect(database='flask_test_1')
+        cursor = cnx.cursor(dictionary=True)
         cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password))
         # Fetch one record and return result
         account = cursor.fetchone()
@@ -54,7 +54,8 @@ def signup():
         password = request.form['password']
         email = request.form['email']
         # Check if account exists using MySQL
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cnx = mysql.connector.connect(database='flask_test_1')
+        cursor = cnx.cursor(dictionary=True)
         cursor.execute('SELECT * FROM accounts WHERE username = %s', (username))
         account = cursor.fetchone()
         # If account exists show error and validation checks
