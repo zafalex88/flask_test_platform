@@ -1,19 +1,19 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_mysqldb import MySQL
-import MySQLdb.cursors
 import re
 
 app = Flask(__name__)
 
 #database connection details
-app.config['MYSQL_HOST'] = 'Alex-PC'
+app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'alex'
 app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'flask_test_1'
+app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = 'my_secret_key'
 
 #mysql initialization
-mysql = MySQL(app)
+db = MySQL(app)
 
 #signin-index.html routing
 @app.route('/', methods=['GET', 'POST'])
@@ -25,11 +25,10 @@ def signin():
         username = request.form['username']
         password = request.form['password']
         # Check if account exists using MySQL
-        cnx = mysql.connector.connect(database='flask_test_1')
-        cursor = cnx.cursor(dictionary=True)
-        cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password))
+        cur = db.connection.cursor()
+        cur.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
         # Fetch one record and return result
-        account = cursor.fetchone()
+        account = cur.fetchone()
         # If account exists in accounts table in out database
         if account:
             # Create session data, we can access this data in other routes
@@ -37,10 +36,11 @@ def signin():
             session['id'] = account['id']
             session['username'] = account['username']
             # Redirect to home page
-            return redirect('/home.html/')
+            return redirect('/home/')
         else:
             # Account doesnt exist or username/password incorrect
             msg = 'Incorrect username or password!'
+        cur.close()
     # Show the login form
     return render_template('/index.html/', msg=msg)
 
@@ -54,10 +54,9 @@ def signup():
         password = request.form['password']
         email = request.form['email']
         # Check if account exists using MySQL
-        cnx = mysql.connector.connect(database='flask_test_1')
-        cursor = cnx.cursor(dictionary=True)
-        cursor.execute('SELECT * FROM accounts WHERE username = %s', (username))
-        account = cursor.fetchone()
+        cur = db.connection.cursor()
+        cur.execute('SELECT * FROM accounts WHERE username = %s', (username,))
+        account = cur.fetchone()
         # If account exists show error and validation checks
         if account:
             msg = 'Account already exists!'
@@ -69,8 +68,9 @@ def signup():
             msg = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            cursor.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email))
-            mysql.connection.commit()
+            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email))
+            db.connection.commit()
+            cur.close()
             msg = 'You have successfully registered!'
     elif request.method == 'POST':
         # Form is empty... (no POST data)
@@ -82,11 +82,11 @@ def signup():
 @app.route('/signout/')
 def signout():
     # Remove session data
-   session.pop('loggedin', None)
-   session.pop('id', None)
-   session.pop('username', None)
-   # Redirect to login page
-   return redirect('/index.html/')
+    session.pop('loggedin', None)
+    session.pop('id', None)
+    session.pop('username', None)
+    # Redirect to login page
+    return redirect('/')
 
 # http://localhost:5000/home - this will be the home page, only accessible for signed in users
 @app.route('/home/')
