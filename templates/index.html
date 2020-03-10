@@ -8,25 +8,26 @@
     </head>
 
     <body>
-        <div id="navigation">
+        <nav id="navigation">
             <ul id="buttons">
                 <li><a href="/">HOME</a></li>
                 <li><a href="/profile/">PROFILE</a></li>
-                <li><a href="/logout/">LOG OUT</a></li>
+                <li><a href="/signout/">SIGN OUT</a></li>
             </ul>
-        </div>
+        </nav>
         <div class="login">
             <header>
                 <h1>SIGN IN</h1>
             </header>
             <div class="links">
                 <a href="/" class="active">Sign In</a>
-                <a href="/register/">Sign Up</a>
+                <a href="/signup/">Sign Up</a>
             </div>
             <div class="loginform">
-                <form action="/index.html" method="post">
+                <form action="/" method="post">
                 <input type="text" name="username" placeholder="Username" id="username" required>
                 <input type="password" name="password" placeholder="Password" id="password" required>
+                <div class="msg">{{ msg }}</div>
                 <input type="submit" value="Sign In">
                 </form>
             </div>

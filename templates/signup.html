@@ -8,26 +8,27 @@
     </head>
     
     <body>
-        <div id="navigation">
+        <nav id="navigation">
             <ul id="buttons">
                 <li><a href="/">HOME</a></li>
                 <li><a href="/profile/">PROFILE</a></li>
-                <li><a href="/logout/">LOG OUT</a></li>
+                <li><a href="/signout/">SIGN OUT</a></li>
             </ul>
-        </div>
+        </nav>
         <div class="registration">
             <header>
                 <h1>SIGN UP</h1>
             </header>
             <div class="links">
                 <a href="/">Sign In</a>
-                <a href="/register/" class="active">Sign Up</a>
+                <a href="/signup/" class="active">Sign Up</a>
             </div>
             <div class="registrationform">
-                <form action="/register.html" method="post">
+                <form action="/signup/" method="post">
                 <input type="email" name="email" placeholder="Email" id="email" required>
                 <input type="text" name="username" placeholder="Username" id="username" required>
                 <input type="password" name="password" placeholder="Password" id="password" required>
+                <div class="msg">{{ msg }}</div>
                 <input type="submit" value="Sign Up">
                 </form>
             </div>

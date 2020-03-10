@@ -121,9 +121,8 @@ body {
 }
 
 footer {
-    margin: 100px;
-    padding: 4rem 0;
+    position: fixed;
+    bottom: 0;
     font-size: 1em;
     color: #ffffff;
-    text-align: center;
 }
