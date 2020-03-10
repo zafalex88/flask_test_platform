@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, session
+from flask_bcrypt import BCrypt
 from flask_mysqldb import MySQL
 import re
 
 app = Flask(__name__)
+bcrypt = BCrypt(app)
 
 #database connection details
 app.config['MYSQL_HOST'] = 'localhost'
@@ -24,9 +26,10 @@ def signin():
         # Create variables for easy access
         username = request.form['username']
         password = request.form['password']
+        check_crypt = bcrypt.check_password_hash(password)
         # Check if account exists using MySQL
         cur = db.connection.cursor()
-        cur.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
+        cur.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, check_crypt,))
         # Fetch one record and return result
         account = cur.fetchone()
         # If account exists in accounts table in out database
@@ -52,6 +55,7 @@ def signup():
         # Create variables for easy access
         username = request.form['username']
         password = request.form['password']
+        crypt = bcrypt.generate_password_hash(password).decode('UTF-8')
         email = request.form['email']
         # Check if account exists using MySQL
         cur = db.connection.cursor()
@@ -68,7 +72,7 @@ def signup():
             msg = 'Please fill out the form!'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email))
+            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, crypt, email))
             db.connection.commit()
             cur.close()
             msg = 'You have successfully registered!'
