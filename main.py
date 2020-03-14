@@ -25,23 +25,23 @@ def signin():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         # Create variables for easy access
         username = request.form['username']
-        password = request.form['password']
+        user_password = request.form['password']
         # Check if account exists using MySQL
         cur = db.connection.cursor()
-        cur.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
+        cur.execute('SELECT * FROM accounts WHERE username = %s', (username,))
         # Fetch one record and return result
         account = cur.fetchone()
-        # If account exists in accounts table in out database
         if account:
-            # Create session data, we can access this data in other routes
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            # Redirect to home page
-            return redirect('/home/')
-        else:
-            # Account doesnt exist or username/password incorrect
-            msg = 'Incorrect username or password!'
+            password = account['password']
+            if bcrypt.check_password_hash(password.encode('utf-8'), user_password.encode('utf-8')):
+                session['loggedin'] = True
+                session['id'] = account['id']
+                session['username'] = account['username']
+                # Redirect to home page
+                return redirect('/home/')
+            else:
+                # Account doesnt exist or username/password incorrect
+                msg = 'Incorrect username or password!'
         cur.close()
     # Show the login form
     return render_template('/index.html/', msg=msg)
@@ -72,8 +72,9 @@ def signup():
         elif password != password_check:
             msg = 'Passwords do not match'
         else:
-            # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email))
+            # Account doesnt exists and the form data is valid, now insert new account into accounts table and hash password
+            pw_hash = bcrypt.generate_password_hash(password).decode('utf-8')
+            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, pw_hash, email))
             db.connection.commit()
             cur.close()
             msg = 'You have successfully registered!'
@@ -96,6 +97,7 @@ def signout():
 # http://localhost:5000/home - this will be the home page, only accessible for signed in users
 @app.route('/home/')
 def home():
+    msg=""
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show home page
