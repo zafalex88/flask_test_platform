@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect, session
-from flask_bcrypt import BCrypt
+from flask_bcrypt import Bcrypt
 from flask_mysqldb import MySQL
 import re
 
 app = Flask(__name__)
-bcrypt = BCrypt(app)
+bcrypt = Bcrypt(app)
 
 #database connection details
 app.config['MYSQL_HOST'] = 'localhost'
