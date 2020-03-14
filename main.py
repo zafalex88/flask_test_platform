@@ -97,7 +97,6 @@ def signout():
 # http://localhost:5000/home - this will be the home page, only accessible for signed in users
 @app.route('/home/')
 def home():
-    msg=""
     # Check if user is loggedin
     if 'loggedin' in session:
         # User is loggedin show home page
