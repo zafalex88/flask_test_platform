@@ -5,12 +5,13 @@
         <link rel="stylesheet" href="../static/style.css">
         <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i,700" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Trade+Winds" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/f2e645ebb5.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
         <nav id="navigation">
             <ul id="buttons">
-                <li><a href="/">HOME</a></li>
+                <li><a href="/home/">HOME</a></li>
                 <li><a href="/profile/">PROFILE</a></li>
                 <li><a href="/signout/">SIGN OUT</a></li>
             </ul>
@@ -25,7 +26,13 @@
             </div>
             <div class="loginform">
                 <form action="/" method="post">
+                <label for="username">
+					<i class="fas fa-user fa-2x"></i>
+				</label>
                 <input type="text" name="username" placeholder="Username" id="username" required>
+                <label for="password">
+					<i class="fas fa-lock fa-2x"></i>
+				</label>
                 <input type="password" name="password" placeholder="Password" id="password" required>
                 <div class="msg">{{ msg }}</div>
                 <input type="submit" value="Sign In">

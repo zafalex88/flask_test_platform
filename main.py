@@ -26,10 +26,9 @@ def signin():
         # Create variables for easy access
         username = request.form['username']
         password = request.form['password']
-        check_crypt = bcrypt.check_password_hash(password)
         # Check if account exists using MySQL
         cur = db.connection.cursor()
-        cur.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, check_crypt,))
+        cur.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password,))
         # Fetch one record and return result
         account = cur.fetchone()
         # If account exists in accounts table in out database
@@ -51,11 +50,11 @@ def signin():
 def signup():
     msg=""
     # Check if "username", "password" and "email" POST requests exist (user submitted form)
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form and 'confirm_password' in request.form:
         # Create variables for easy access
         username = request.form['username']
         password = request.form['password']
-        crypt = bcrypt.generate_password_hash(password).decode('UTF-8')
+        password_check = request.form['confirm_password']
         email = request.form['email']
         # Check if account exists using MySQL
         cur = db.connection.cursor()
@@ -70,9 +69,11 @@ def signup():
             msg = 'Username must contain only characters and numbers!'
         elif not username or not password or not email:
             msg = 'Please fill out the form!'
+        elif password != password_check:
+            msg = 'Passwords do not match'
         else:
             # Account doesnt exists and the form data is valid, now insert new account into accounts table
-            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, crypt, email))
+            cur.execute('INSERT INTO accounts VALUES (NULL, %s, %s, %s)', (username, password, email))
             db.connection.commit()
             cur.close()
             msg = 'You have successfully registered!'
@@ -99,5 +100,6 @@ def home():
     if 'loggedin' in session:
         # User is loggedin show home page
         return render_template('home.html', username=session['username'])
-    # User is not loggedin redirect to login page
-    return redirect('/index.html/')
+    else:
+        # User is not loggedin redirect to login page
+        return redirect('/')
