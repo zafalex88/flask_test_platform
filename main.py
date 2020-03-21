@@ -7,10 +7,10 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 #database connection details
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'alex'
-app.config['MYSQL_PASSWORD'] = 'password'
-app.config['MYSQL_DB'] = 'flask_test_1'
+app.config['MYSQL_HOST'] = 'zafalex88.mysql.pythonanywhere-services.com'
+app.config['MYSQL_USER'] = 'zafalex88'
+app.config['MYSQL_PASSWORD'] = 'alex123!@#'
+app.config['MYSQL_DB'] = 'zafalex88$test_1'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = 'my_secret_key'
 
@@ -104,3 +104,45 @@ def home():
     else:
         # User is not loggedin redirect to login page
         return redirect('/')
+    
+# http://localhost:5000/profile - this will be the profile page, only accessible for signed in users
+@app.route('/profile/')
+def profile():
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        username = session['username']
+        cur = db.connection.cursor()
+        cur.execute('SELECT * FROM accounts WHERE username = %s', (username,))
+        account = cur.fetchone()
+        # User is loggedin show my profile
+        return render_template('profile.html', username=session['username'], email=account['email'], password=account['password'])
+    else:
+        # User is not loggedin redirect to login page
+        return redirect('/')
+    
+# http://localhost:5000/update - this will be the update profile page, only accessible for signed in users
+@app.route('/update/', methods=['GET', 'POST'])
+def update():
+    msg=""
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        if request.method == 'POST' and 'address' in request.form and 'birthday' in request.form:
+            username = session['username']
+            address = request.form['address']
+            birthday = request.form['birthday']
+            cur = db.connection.cursor()
+            cur.execute('UPDATE accounts SET address = %s, birthday = %s where username = %s', (address, birthday, username))
+            db.connection.commit()
+            cur.close()
+            msg = 'Update successful!'
+        elif request.method == 'POST':
+            # Form is empty... (no POST data)
+            msg = 'No data to update'
+            # User is loggedin show my profile
+        return render_template('update.html', username=session['username'], msg=msg)
+    else:
+        # User is not loggedin redirect to login page
+        return redirect('/')
+
+if __name__ == '__main__':
+   app.run()

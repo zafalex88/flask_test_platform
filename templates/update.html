@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Profile Update</title>
+        <link rel="stylesheet" href="../static/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather:400,400i,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dosis:500,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/f2e645ebb5.js" crossorigin="anonymous"></script>
+    </head>
+    <nav id="navigation">
+        <ul id="buttons">
+            <li><a href="/home/">HOME</a></li>
+            <li><a href="/profile/">PROFILE</a></li>
+            <li><a href="/signout/">SIGN OUT</a></li>
+            <i>{{username}}</i>
+        </ul>   
+    </nav>
+    <body>
+        <div class="dashboard">
+            <header>
+                <h1>My Profile</h1>
+            </header>
+            <div class="links">
+                <a href="/profile/">My Profile</a>
+                <a href="/update/" class="active">Edit Profile</a>
+            </div>
+            <div class="profile">
+                <form action="/update/" method="post">
+                <label for="address">
+					<i class="fas fa-home fa-2x"></i>
+				</label>
+                <input type="text" name="address" placeholder="Address" id="address">
+                <label for="birthday">
+					<i class="fas fa-birthday-cake fa-2x"></i>
+				</label>
+                <input type="date" name="birthday" placeholder="Birthday" id="birthday">
+                <div class="msg">{{ msg }}</div>
+                <input type="submit" value="Update">
+                </form>
+            </div>
+        <footer>
+            <span>&copy; Alex Zafiris</span>
+        </footer>
+    </body>
+</html>

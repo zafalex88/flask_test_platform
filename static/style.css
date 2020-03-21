@@ -1,128 +1,264 @@
-* {
-    box-sizing: border-box;
-    margin: auto;
+html {
+    background-image: linear-gradient(rgb(15, 112, 119), rgb(67, 111, 114));
 }
 
-body {
-    font-family: "Merriweather";
-    background-image: url("./back2.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+nav {
+    height: 50px;
+    top: 0;
+    width: 100%;
+    position: fixed;
+    background-image: linear-gradient(90deg, #da5000 0%, #d1906a 100%);
+    display: inline-block;
 }
 
-nav i {
-    font-family: "Merriweather";
-    display: flex;
-    text-align: right;
-    font-size: 12px;
+nav li {
+    width: 120px;
+    margin-left: 80px;
+    height: 100%;
+    font-family: "Dosis";
+    text-align: center;
+    display: inline-block;
+    font-size: 22px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+nav a:hover {
     color: rgb(0, 0, 0);
 }
 
-#navigation a {
-    text-decoration: none;
-    color: #073e92;
+nav i {
+    width: 120px;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    float: right;
+    margin-right: 50px;
 }
 
-#navigation a:hover {
+body {
+    display: grid;
+    grid-template-columns: 50px auto 350px 40px;
+    grid-template-rows: 100px 730px 80px 50px;
+    font-family: "Merriweather";
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-home {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    margin: 150px auto auto auto;
     color: #fff;
-}
-
-#navigation {
-    height: 40px;
-    width: 100%;
-    background-color: rgb(209, 209, 209);
-    display: flex;
     text-align: center;
-    font-family: "Trade Winds";
+    font-size: 120px;
+    font-family: "Dosis";
+    font-weight: 800;
 }
 
-#navigation li {
-    display: inline-block;
-    width: 150px;
-    padding: 5px 5px 0px 0px;
-    font-weight: bold;
+.welcome {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    margin: auto;
+    color: #fff;
+    text-align: center;
+    font-size: 120px;
+    font-family: "Dosis";
+    font-weight: 800;
 }
 
-.login,
-.registration {
-    width: 400px;
+.welcome span {
+    animation: animate 5s linear;
+    animation-iteration-count: infinite;
+}
+
+.welcome span:nth-child(1) {
+    animation-delay: 0.15s;
+}
+
+.welcome span:nth-child(2) {
+    animation-delay: 0.25s;
+}
+
+.welcome span:nth-child(3) {
+    animation-delay: 0.35s;
+}
+
+.welcome span:nth-child(4) {
+    animation-delay: 0.45s;
+}
+
+.welcome span:nth-child(5) {
+    animation-delay: 0.55s;
+}
+
+.welcome span:nth-child(6) {
+    animation-delay: 0.65s;
+}
+
+.welcome span:nth-child(7) {
+    animation-delay: 0.75s;
+}
+
+@keyframes animate {
+    0% {
+        filter: blur(0);
+    }
+    20% {
+        filter: blur(2px);
+    }
+    40% {
+        filter: blur(6px);
+    }
+    50% {
+        filter: blur(12px);
+    }
+    60% {
+        filter: blur(3px);
+    }
+    80% {
+        filter: blur(0.5px);
+    }
+    100% {
+        filter: blur(0);
+    }
+}
+
+.login {
+    grid-column-start: 3;
+    grid-row-start: 2;
+    margin: auto;
+    height: 490px;
+    width: 100%;
     background-color: #fff;
-    margin-top: 100px;
-    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.9);
+    box-shadow: 0px 0px 14px 9px rgba(0, 0, 0, 1.0);
+}
+
+.registration {
+    grid-column-start: 3;
+    grid-row-start: 2;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 14px 9px rgba(0, 0, 0, 1.0);
+}
+
+.dashboard {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 2;
+    width: 400px;
+    height: auto;
+    margin: auto auto auto auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 14px 9px rgba(0, 0, 0, 1.0);
+}
+
+.dashboard h1 {
+    font-family: "Rock Salt", cursive;
+    height: 50px;
+    text-align: center;
+    color: #3b4047;
+    font-size: 26px;
+    margin: auto;
 }
 
 .login h1,
 .registration h1 {
+    height: 50px;
     text-align: center;
     color: #5b6574;
     font-size: 26px;
-    padding: 20px 0;
-    border-bottom: 1px solid #dee0e4;
+    margin: 20px auto auto auto;
+    border-bottom: 2px solid #cfcfcf;
 }
 
-.login .links,
-.registration .links {
-    display: flex;
-    padding-top: 15px;
+.dashboard .links a {
+    color: #adb2ba;
+    width: 100px;
+    margin-top: 30px;
+    margin-left: 67px;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 .login .links a,
 .registration .links a {
     color: #adb2ba;
-    display: inline-flex;
-    padding: 0 10px 10px 10px;
+    width: 100px;
+    margin-top: 30px;
+    margin-left: 50px;
+    text-align: center;
+    display: inline-block;
     font-weight: bold;
     text-decoration: none;
 }
 
+.dashboard .links a.active,
 .login .links a.active,
 .registration .links a.active {
     border-bottom: 3px solid #3274d6;
     color: #39393a;
 }
 
+.dashboard .links a:hover,
 .login .links a:hover,
 .registration .links a:hover {
     color: #000000;
 }
 
+.profile,
 .loginform,
 .registrationform {
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 20px;
+    width: 100%;
 }
 
+.profile label,
 .loginform label,
 .registrationform label {
     display: flex;
-    width: 80px;
+    margin: 30px auto auto auto;
+    width: 70px;
     height: 40px;
     background-color: #3274d6;
     color: #ffffff;
+    padding-left: 40px;
+    align-items: center;
+    align-content: center;
 }
 
+.profile input[type="password"],
+.profile input[type="text"],
+.profile input[type="email"],
+.profile input[type="date"],
 .loginform input[type="password"],
 .loginform input[type="text"],
 .registrationform input[type="password"],
 .registrationform input[type="text"],
 .registrationform input[type="email"] {
     display: flex;
+    margin: auto;
     width: 300px;
     height: 50px;
     border: 1px solid #d8d8d8;
-    margin: auto 50px 25px 50px;
     padding: 0 15px;
     align-items: middle;
     align-content: middle;
     text-align: center;
 }
 
+.profile input[type="submit"],
 .loginform input[type="submit"],
 .registrationform input[type="submit"] {
     width: 100%;
     padding: 15px;
-    margin-top: 20px;
+    margin-top: 30px;
     background-color: #073e92;
     font-weight: bold;
     color: white;
@@ -130,6 +266,7 @@ nav i {
     transition: background-color 500ms linear, color 500ms;
 }
 
+.profile input[type="sumbit"]:hover,
 .loginform input[type="submit"]:hover,
 .registrationform input[type="submit"]:hover {
     background-color: rgb(235, 235, 235);
@@ -139,15 +276,20 @@ nav i {
 .msg {
     font-size: 12px;
     font-weight: bold;
-    margin: auto;
+    margin: 25px auto auto auto;
     text-align: center;
+    color: #000;
 }
 
 footer {
+    background-color: rgb(108, 177, 184);
     position: fixed;
-    left: 0;
     bottom: 0;
+    left: 0;
     width: 100%;
     text-align: center;
     color: #ffffff;
+    font-family: "Dosis";
+    font-weight: 800;
+    letter-spacing: 1.5px;
 }
