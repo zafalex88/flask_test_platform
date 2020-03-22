@@ -104,7 +104,7 @@ def home():
     else:
         # User is not loggedin redirect to login page
         return redirect('/')
-    
+
 # http://localhost:5000/profile - this will be the profile page, only accessible for signed in users
 @app.route('/profile/')
 def profile():
@@ -119,12 +119,11 @@ def profile():
     else:
         # User is not loggedin redirect to login page
         return redirect('/')
-    
+
 # http://localhost:5000/update - this will be the update profile page, only accessible for signed in users
 @app.route('/update/', methods=['GET', 'POST'])
 def update():
     msg=""
-    # Check if user is loggedin
     if 'loggedin' in session:
         if request.method == 'POST' and 'address' in request.form and 'birthday' in request.form:
             username = session['username']
@@ -135,10 +134,6 @@ def update():
             db.connection.commit()
             cur.close()
             msg = 'Update successful!'
-        elif request.method == 'POST':
-            # Form is empty... (no POST data)
-            msg = 'No data to update'
-            # User is loggedin show my profile
         return render_template('update.html', username=session['username'], msg=msg)
     else:
         # User is not loggedin redirect to login page
