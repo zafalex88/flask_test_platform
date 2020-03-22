@@ -7,10 +7,10 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 #database connection details
-app.config['MYSQL_HOST'] = 'zafalex88.mysql.pythonanywhere-services.com'
-app.config['MYSQL_USER'] = 'zafalex88'
-app.config['MYSQL_PASSWORD'] = 'alex123!@#'
-app.config['MYSQL_DB'] = 'zafalex88$test_1'
+app.config['MYSQL_HOST'] = ''
+app.config['MYSQL_USER'] = ''
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = ''
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = 'my_secret_key'
 
