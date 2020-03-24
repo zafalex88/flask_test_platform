@@ -3,6 +3,7 @@ html {
 }
 
 nav {
+    position: fixed;
     height: 50px;
     top: 0;
     width: 100%;
@@ -11,15 +12,19 @@ nav {
     display: inline-block;
 }
 
+nav ul {
+    top: 0;
+    height: 100%;
+}
+
 nav li {
-    width: 120px;
+    width: 130px;
     margin-left: 80px;
     height: 100%;
-    font-family: "Dosis";
+    font-family: "Lemonada";
     display: inline-block;
     text-align: center;
     font-size: 22px;
-    font-weight: 800;
     letter-spacing: 1px;
 }
 
@@ -55,11 +60,11 @@ body {
     grid-column-start: 1;
     grid-column-end: 5;
     grid-row-start: 2;
-    margin: 150px auto auto auto;
+    margin: 50px auto auto auto;
     color: #fff;
     text-align: center;
-    font-size: 120px;
-    font-family: "Dosis";
+    font-size: 100px;
+    font-family: "Caveat";
     font-weight: 800;
 }
 
@@ -69,8 +74,8 @@ body {
     margin: auto;
     color: #fff;
     text-align: center;
-    font-size: 120px;
-    font-family: "Dosis";
+    font-size: 100px;
+    font-family: "Caveat";
     font-weight: 800;
 }
 
@@ -135,7 +140,7 @@ body {
     grid-column-start: 3;
     grid-row-start: 2;
     margin: auto;
-    height: 486px;
+    height: 494px;
     width: 100%;
     background-color: #fff;
     box-shadow: 0px 0px 14px 9px rgba(0, 0, 0, 1.0);
@@ -243,6 +248,18 @@ body {
     align-content: center;
 }
 
+.followform input[type="text"] {
+    width: 300px;
+    margin: 15px auto 0px auto;
+    height: 40px;
+    display: flex;
+    border: 1px solid #d8d8d8;
+    padding: 0 15px;
+    align-items: middle;
+    align-content: middle;
+    text-align: center;
+}
+
 .profile input[type="password"],
 .profile input[type="text"],
 .profile input[type="email"],
@@ -263,12 +280,10 @@ body {
     text-align: center;
 }
 
-.profile input[type="submit"],
-.loginform input[type="submit"],
-.registrationform input[type="submit"] {
+.followform input[type="submit"] {
     width: 100%;
     padding: 15px;
-    margin-top: 30px;
+    margin-top: 20px;
     background-color: #da5000;
     font-family: "Dosis";
     font-weight: 800;
@@ -278,7 +293,23 @@ body {
     transition: background-color 500ms linear, color 500ms;
 }
 
-.profile input[type="sumbit"]:hover,
+.profile input[type="submit"],
+.loginform input[type="submit"],
+.registrationform input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 23px;
+    background-color: #da5000;
+    font-family: "Dosis";
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 22px;
+    transition: background-color 500ms linear, color 500ms;
+}
+
+.followform input[type="submit"]:hover,
+.profile input[type="submit"]:hover,
 .loginform input[type="submit"]:hover,
 .registrationform input[type="submit"]:hover {
     background-color: rgb(235, 235, 235);
@@ -286,9 +317,11 @@ body {
 }
 
 .msg {
+    height: 20px;
+    width: 100%;
+    font-family: "Arial";
     font-size: 12px;
-    font-weight: bold;
-    margin: 25px auto auto auto;
+    margin: 20px auto 0px auto;
     text-align: center;
     color: #000;
 }
@@ -304,6 +337,25 @@ footer {
     font-family: "Dosis";
     font-weight: 800;
     letter-spacing: 1.5px;
+}
+
+.num,
+.search {
+    margin-top: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+table {
+    margin-top: 20px;
+    width: 100%;
+    border-top: 2px solid #585858;
+    overflow: scroll;
+}
+
+td,
+th {
+    text-align: center;
 }
 
 @media screen and (max-width: 1200px) {
@@ -337,7 +389,8 @@ footer {
         margin-right: 20px;
         font-size: 14px;
     }
-    .welcome {
+    .welcome,
+    .welcome-home {
         grid-column-start: 1;
         grid-column-end: 5;
         grid-row-start: 1;
@@ -398,13 +451,13 @@ footer {
         height: 40px;
     }
     nav li {
-        width: 65px;
-        margin-left: 10px;
+        width: 80px;
+        margin-left: 5px;
         height: 100%;
         font-family: "Dosis";
         text-align: center;
         display: inline-block;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 800;
         letter-spacing: 0.75px;
     }
@@ -417,5 +470,6 @@ footer {
         margin-right: 10px;
         font-size: 12px;
         letter-spacing: 0.75px;
+        overflow: hidden;
     }
 }

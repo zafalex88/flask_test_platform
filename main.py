@@ -7,10 +7,10 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 #database connection details
-app.config['MYSQL_HOST'] = ''
-app.config['MYSQL_USER'] = ''
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = ''
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'alex'
+app.config['MYSQL_PASSWORD'] = 'Password123!@#'
+app.config['MYSQL_DB'] = 'flask_test_1'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = 'my_secret_key'
 
@@ -135,6 +135,53 @@ def update():
             cur.close()
             msg = 'Update successful!'
         return render_template('update.html', username=session['username'], msg=msg)
+    else:
+        # User is not loggedin redirect to login page
+        return redirect('/')
+
+# http://localhost:5000/followers - this will be the follower page, only accessible for signed in users
+@app.route('/followers/')
+def followers():
+    if 'loggedin' in session:
+        username = session['username']
+        cur = db.connection.cursor()
+        cur.execute('SELECT * from accounts WHERE username = %s', (username,))
+        account = cur.fetchone()
+        follower_id = account['id']
+        cur.execute('SELECT followed_id from followers where follower_id = %s', (follower_id,))
+        followed = cur.fetchall()
+        num = len(followed)
+        cur.execute('SELECT followed_username from followers WHERE follower_id = %s', (follower_id,))
+        followed_username = cur.fetchall()
+        x = str([value['followed_username'] for value in followed_username])
+        return render_template('followers.html', username=session['username'], num=num, usernames=x.replace('[','').replace(']', '').replace(',', '').replace("'", '').replace(' ', ' - '))
+    else:
+        # User is not loggedin redirect to login page
+        return redirect('/')
+
+# http://localhost:5000/follow - follow a friend page, only accessible for signed in users
+@app.route('/follow/', methods=['GET', 'POST'])
+def follow():
+    msg=""
+    if 'loggedin' in session:
+        if request.method == 'POST' and 'username' in request.form:
+            username=session['username']
+            followed_username = request.form['username']
+            cur = db.connection.cursor()
+            cur.execute('SELECT * FROM accounts WHERE username = %s', (followed_username,))
+            account = cur.fetchone()
+            if account:
+                followed_id = account['id']
+                cur.execute('SELECT * FROM accounts WHERE username = %s', (username,))
+                account2 = cur.fetchone()
+                follower_id = account2['id']
+                cur.execute('INSERT INTO followers VALUES (NULL, %s, %s, %s)', (follower_id, followed_id, followed_username))
+                msg = "Success"
+            else:
+                msg = "Wrong username"
+            db.connection.commit()
+            cur.close()
+        return render_template('follow.html', username=session['username'], msg=msg)
     else:
         # User is not loggedin redirect to login page
         return redirect('/')
