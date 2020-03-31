@@ -10,22 +10,34 @@ nav {
     position: fixed;
     background-image: linear-gradient(90deg, #da5000 0%, #d1906a 100%);
     display: inline-block;
+    z-index: 2;
 }
 
 nav ul {
-    top: 0;
     height: 100%;
 }
 
 nav li {
     width: 130px;
-    margin-left: 80px;
+    margin-left: 150px;
     height: 100%;
     font-family: "Lemonada";
     display: inline-block;
     text-align: center;
     font-size: 22px;
     letter-spacing: 1px;
+    line-height: 1;
+}
+
+nav i {
+    float: right;
+    margin-right: 150px;
+    width: 120px;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    font-family: "Dosis";
+    letter-spacing: 0.8px;
+    font-size: 16px;
 }
 
 nav a {
@@ -37,30 +49,66 @@ nav a:hover {
     color: rgb(0, 0, 0);
 }
 
-nav i {
-    width: 120px;
-    height: 100%;
-    color: rgb(255, 255, 255);
-    float: right;
-    margin-right: 50px;
-    font-family: "Dosis";
-    letter-spacing: 0.8px;
-    font-size: 16px;
-}
-
 body {
     display: grid;
-    grid-template-columns: 50px auto 350px 40px;
-    grid-template-rows: 100px 730px 80px 50px;
+    grid-template-columns: 30px 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 30px;
+    grid-template-rows: 50px 50px 180px 180px 180px 180px 180px 50px;
     margin: 0;
     padding: 0;
 }
 
+.dropbtn {
+    width: 120px;
+    height: 100%;
+    color: rgb(255, 255, 255);
+    margin-right: 150px;
+    font-family: "Dosis";
+    letter-spacing: 0.8px;
+    font-size: 16px;
+    background-color: transparent;
+    border: None;
+}
+
+.dropdown {
+    float: right;
+    position: relative;
+    font-family: "Dosis";
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: transparent;
+    color: #000;
+}
+
 .welcome-home {
     grid-column-start: 1;
-    grid-column-end: 5;
-    grid-row-start: 2;
-    margin: 50px auto auto auto;
+    grid-column-end: 11;
+    grid-row-start: 3;
+    margin: auto;
     color: #fff;
     text-align: center;
     font-size: 100px;
@@ -70,65 +118,82 @@ body {
 
 .welcome {
     grid-column-start: 2;
+    grid-column-end: 8;
     grid-row-start: 2;
+    grid-row-end: 3;
     margin: auto;
     color: #fff;
     text-align: center;
     font-size: 100px;
     font-family: "Caveat";
     font-weight: 800;
+    z-index: 1;
 }
 
-.welcome span {
-    animation: animate 5s linear;
+.photos {
+    display: grid;
+    font-family: "Caveat";
+}
+
+.photo1 {
+    display: grid;
+    grid-column: 3 / span 1;
+    grid-row: 4 / span 1;
+    box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 1.0);
+    font-family: "Caveat";
+}
+
+.photo2 {
+    display: grid;
+    grid-column: 5 / span 1;
+    grid-row: 4 / span 1;
+    box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 1.0);
+    font-family: "Caveat";
+}
+
+.photo3 {
+    display: grid;
+    grid-column: 4 / span 1;
+    grid-row: 5 / span 1;
+    box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 1.0);
+    font-family: "Caveat";
+}
+
+.photo4 {
+    display: grid;
+    grid-column: 6 / span 1;
+    grid-row: 5 / span 1;
+    box-shadow: 0px 0px 15px 7px rgba(0, 0, 0, 1.0);
+    font-family: "Caveat";
+}
+
+.photo1 i,
+.photo2 i,
+.photo3 i,
+.photo4 i {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0);
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.welcome i {
+    animation: animate 4s linear;
     animation-iteration-count: infinite;
-}
-
-.welcome span:nth-child(1) {
-    animation-delay: 0.15s;
-}
-
-.welcome span:nth-child(2) {
-    animation-delay: 0.25s;
-}
-
-.welcome span:nth-child(3) {
-    animation-delay: 0.35s;
-}
-
-.welcome span:nth-child(4) {
-    animation-delay: 0.45s;
-}
-
-.welcome span:nth-child(5) {
-    animation-delay: 0.55s;
-}
-
-.welcome span:nth-child(6) {
-    animation-delay: 0.65s;
-}
-
-.welcome span:nth-child(7) {
-    animation-delay: 0.75s;
 }
 
 @keyframes animate {
     0% {
         filter: blur(0);
     }
-    20% {
-        filter: blur(2px);
-    }
-    40% {
-        filter: blur(6px);
+    25% {
+        filter: blur(1px);
     }
     50% {
-        filter: blur(12px);
+        filter: blur(10px);
     }
-    60% {
-        filter: blur(3px);
-    }
-    80% {
+    75% {
         filter: blur(0.5px);
     }
     100% {
@@ -137,11 +202,13 @@ body {
 }
 
 .login {
-    grid-column-start: 3;
-    grid-row-start: 2;
+    grid-column-start: 8;
+    grid-column-end: 10;
+    grid-row-start: 4;
+    grid-row-end: 7;
     margin: auto;
-    height: 494px;
-    width: 100%;
+    height: auto;
+    width: auto;
     background-color: #fff;
     box-shadow: 0px 0px 14px 9px rgba(0, 0, 0, 1.0);
     font-family: "Dosis";
@@ -149,9 +216,11 @@ body {
 }
 
 .registration {
-    grid-column-start: 3;
-    grid-row-start: 2;
-    width: 100%;
+    grid-column-start: 8;
+    grid-column-end: 10;
+    grid-row-start: 3;
+    grid-row-end: 8;
+    width: auto;
     height: auto;
     margin: auto;
     background-color: #fff;
@@ -162,11 +231,12 @@ body {
 
 .dashboard {
     grid-column-start: 1;
-    grid-column-end: 5;
-    grid-row-start: 2;
+    grid-column-end: 11;
+    grid-row-start: 3;
+    grid-row-end: 5;
     width: 400px;
     height: auto;
-    margin: auto auto auto auto;
+    margin: auto;
     background-color: #fff;
     box-shadow: 0px 0px 14px 9px rgba(0, 0, 0, 1.0);
     font-family: "Dosis";
@@ -182,13 +252,13 @@ body {
     margin: auto;
 }
 
-.login h1,
-.registration h1 {
+.login header,
+.registration header {
     height: 50px;
     text-align: center;
     color: #5b6574;
-    font-size: 26px;
-    margin: 20px auto auto auto;
+    font-size: 16px;
+    margin: auto;
     border-bottom: 2px solid #cfcfcf;
 }
 
@@ -293,7 +363,19 @@ body {
     transition: background-color 500ms linear, color 500ms;
 }
 
-.profile input[type="submit"],
+.profile input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    margin-top: 23px;
+    background-color: #da5000;
+    font-family: "Dosis";
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 22px;
+    transition: background-color 500ms linear, color 500ms;
+}
+
 .loginform input[type="submit"],
 .registrationform input[type="submit"] {
     width: 100%;
@@ -327,10 +409,10 @@ body {
 }
 
 footer {
-    background-color: rgb(108, 177, 184);
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    grid-column-start: 1;
+    grid-column-end: 11;
+    grid-row-start: 8;
+    justify-content: center;
     width: 100%;
     text-align: center;
     color: #ffffff;
@@ -361,7 +443,7 @@ th {
 @media screen and (max-width: 1200px) {
     body {
         display: grid;
-        grid-template-columns: 50px auto 350px 40px;
+        grid-template-columns: 40px 560px 560px 40px;
         grid-template-rows: 150px 730px 80px 50px;
         margin: 0;
         padding: 0;
@@ -380,7 +462,7 @@ th {
         font-weight: 800;
         letter-spacing: 0.75px;
     }
-    nav i {
+    .dropbtn {
         font-family: "Dosis";
         width: 95px;
         height: 100%;
@@ -396,7 +478,7 @@ th {
         grid-row-start: 1;
         margin: 50px auto auto auto;
         color: #fff;
-        font-size: 70px;
+        font-size: 35px;
         font-family: "Dosis";
         font-weight: 800;
         letter-spacing: 2px;
@@ -406,7 +488,7 @@ th {
         grid-column-end: 5;
         grid-row-start: 2;
         margin: 30px auto auto auto;
-        height: 486px;
+        height: auto;
         width: 350px;
         background-color: #fff;
         box-shadow: 0px 0px 12px 7px rgba(0, 0, 0, 0.9);
@@ -419,7 +501,7 @@ th {
         grid-row-start: 2;
         width: 350px;
         height: auto;
-        margin: auto;
+        margin: 30px auto auto auto;
         background-color: #fff;
         box-shadow: 0px 0px 12px 7px rgba(0, 0, 0, 0.9);
         font-family: "Dosis";
@@ -437,13 +519,19 @@ th {
         font-family: "Dosis";
         letter-spacing: 1px;
     }
+    .photo1,
+    .photo2,
+    .photo3,
+    .photo4 {
+        display: none;
+    }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 700px) {
     body {
         display: grid;
-        grid-template-columns: 50px auto 350px 40px;
-        grid-template-rows: 150px 730px 80px 50px;
+        grid-template-columns: 40px 235px 235px 40px;
+        grid-template-rows: 150px 730px 50px 50px;
         margin: 0;
         padding: 0;
     }
@@ -461,7 +549,7 @@ th {
         font-weight: 800;
         letter-spacing: 0.75px;
     }
-    nav i {
+    .dropbtn {
         font-family: "Dosis";
         width: 95px;
         height: 100%;
@@ -470,6 +558,11 @@ th {
         margin-right: 10px;
         font-size: 12px;
         letter-spacing: 0.75px;
-        overflow: hidden;
+    }
+    .photo1,
+    .photo2,
+    .photo3,
+    .photo4 {
+        display: none;
     }
 }

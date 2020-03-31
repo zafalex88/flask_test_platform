@@ -10,15 +10,20 @@
         <link href="https://fonts.googleapis.com/css?family=Dosis:500,800" rel="stylesheet">
         <script src="https://kit.fontawesome.com/f2e645ebb5.js" crossorigin="anonymous"></script>
     </head>
-    <nav id="navigation">
-        <ul id="buttons">
-            <li><a href="/home/">HOME</a></li>
-            <li><a href="/followers/">FOLLOWERS</a></li>
-            <li><a href="/signout/">SIGN OUT</a></li>
-            <i><a href="/profile/">{{username}}</a></i>
-        </ul>
-    </nav>
     <body>
+        <nav id="navigation">
+            <ul id="buttons">
+                <li><a href="/home/">HOME</a></li>
+                <div class="dropdown">
+                    <button class="dropbtn">{{username}}</button>
+                    <div class="dropdown-content">
+                        <a href="/profile/">Profile</a>
+                        <a href="/followers/">Followers</a>
+                        <a href="/signout/">Sign Out</a>
+                    </div>
+                </div>
+            </ul>
+        </nav>
         <div class="dashboard">
             <header>
                 <h1>My Profile</h1>
@@ -42,6 +47,7 @@
 				</label>
                 <input type="password" id="password" name="password" value="{{password}}" readonly>
                 </form>
+            </div>
         </div>
         <footer>
             <span>&copy; Alex Zafiris</span>

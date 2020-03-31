@@ -153,8 +153,7 @@ def followers():
         num = len(followed)
         cur.execute('SELECT followed_username from followers WHERE follower_id = %s', (follower_id,))
         followed_username = cur.fetchall()
-        x = str([value['followed_username'] for value in followed_username])
-        return render_template('followers.html', username=session['username'], num=num, usernames=x.replace('[','').replace(']', '').replace(',', '').replace("'", '').replace(' ', ' - '))
+        return render_template('followers.html', username=session['username'], num=num, usernames=followed_username)
     else:
         # User is not loggedin redirect to login page
         return redirect('/')
