@@ -462,6 +462,7 @@ th {
         font-weight: 800;
         letter-spacing: 0.75px;
     }
+    nav i,
     .dropbtn {
         font-family: "Dosis";
         width: 95px;
@@ -476,6 +477,7 @@ th {
         grid-column-start: 1;
         grid-column-end: 5;
         grid-row-start: 1;
+        justify-content: center;
         margin: 50px auto auto auto;
         color: #fff;
         font-size: 35px;
@@ -487,6 +489,7 @@ th {
         grid-column-start: 1;
         grid-column-end: 5;
         grid-row-start: 2;
+        justify-content: center;
         margin: 30px auto auto auto;
         height: auto;
         width: 350px;
@@ -499,6 +502,7 @@ th {
         grid-column-start: 1;
         grid-column-end: 5;
         grid-row-start: 2;
+        justify-content: center;
         width: 350px;
         height: auto;
         margin: 30px auto auto auto;
@@ -511,6 +515,7 @@ th {
         grid-column-start: 1;
         grid-column-end: 5;
         grid-row-start: 2;
+        justify-content: center;
         width: 400px;
         height: auto;
         margin: 0 auto auto auto;
@@ -549,6 +554,7 @@ th {
         font-weight: 800;
         letter-spacing: 0.75px;
     }
+    nav i,
     .dropbtn {
         font-family: "Dosis";
         width: 95px;
@@ -558,6 +564,58 @@ th {
         margin-right: 10px;
         font-size: 12px;
         letter-spacing: 0.75px;
+    }
+    .welcome,
+    .welcome-home {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 1;
+        justify-content: center;
+        margin: 50px auto auto auto;
+        color: #fff;
+        font-size: 35px;
+        font-family: "Dosis";
+        font-weight: 800;
+        letter-spacing: 2px;
+    }
+    .login {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        justify-content: center;
+        margin: 30px auto auto auto;
+        height: auto;
+        width: 350px;
+        background-color: #fff;
+        box-shadow: 0px 0px 12px 7px rgba(0, 0, 0, 0.9);
+        font-family: "Dosis";
+        letter-spacing: 0.75px;
+    }
+    .registration {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        justify-content: center;
+        width: 350px;
+        height: auto;
+        margin: 30px auto auto auto;
+        background-color: #fff;
+        box-shadow: 0px 0px 12px 7px rgba(0, 0, 0, 0.9);
+        font-family: "Dosis";
+        letter-spacing: 0.75px;
+    }
+    .dashboard {
+        grid-column-start: 1;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        justify-content: center;
+        width: 400px;
+        height: auto;
+        margin: 0 auto auto auto;
+        background-color: #fff;
+        box-shadow: 0px 0px 12px 7px rgba(0, 0, 0, 0.9);
+        font-family: "Dosis";
+        letter-spacing: 1px;
     }
     .photo1,
     .photo2,
