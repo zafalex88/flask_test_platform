@@ -7,12 +7,12 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 
 #database connection details
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'alex'
-app.config['MYSQL_PASSWORD'] = 'Password123!@#'
-app.config['MYSQL_DB'] = 'flask_test_1'
+app.config['MYSQL_HOST'] = 'your hostname'
+app.config['MYSQL_USER'] = 'your username'
+app.config['MYSQL_PASSWORD'] = 'your password'
+app.config['MYSQL_DB'] = 'database name you created'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.secret_key = 'my_secret_key'
+app.secret_key = 'your secret key'
 
 #mysql initialization
 db = MySQL(app)
