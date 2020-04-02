@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Followers</title>
+        <title>Homepage</title>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=0.85">
         <link rel="stylesheet" href="../static/style.css">
         <link href="https://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Dosis:500,800" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Caveat:700|Chewy&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Lemonada:500&display=swap" rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css?family=Dosis:500,800" rel="stylesheet">
         <script src="https://kit.fontawesome.com/f2e645ebb5.js" crossorigin="anonymous"></script>
     </head>
     <nav id="navigation">
@@ -25,25 +25,17 @@
         </ul>
     </nav>
     <body>
-        <div class="dashboard">
+        <div class="upload-form">
             <header>
-                <h1>Followers</h1>
+                <h1>Upload Recipe</h1>
             </header>
-            <div class="links">
-                <a href="/followers/" class="active">Following</a>
-                <a href="/follow/">Follow</a>
-            </div>
-            <div class='following'>
-            <div class="num"><i>You currently follow {{num}} users!</i></div>
-                <table>
-                    <tr class="head">
-                        <th>Username</th>
-                    </tr>
-                    <tr>
-                        <td>{{usernames}}</td>
-                    </tr>
-                </table>
-            </div>
+            <form action="/upload/" id="upload" method="post">
+                <textarea name="recipe" id="recipe" placeholder="Write your recipe here..." required></textarea>
+                <label for="files">Select your plate photo:</label>
+                <input type="file" id="img" name="img" accept="image/*" required>
+                <div class="msg">{{ msg }}</div>
+                <input type="submit" value="Upload">
+            </form>
         </div>
         <footer>
             <span>&copy; Alex Zafiris</span>

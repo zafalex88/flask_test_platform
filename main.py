@@ -185,5 +185,29 @@ def follow():
         # User is not loggedin redirect to login page
         return redirect('/')
 
+# http://localhost:5000/upload - this will be the upload page, only accessible for signed in users
+@app.route('/upload/', methods=['GET', 'POST'])
+def upload():
+    msg = ""
+    # Check if user is loggedin
+    if 'loggedin' in session:
+        if request.method == 'POST':
+            username = session['username']
+            recipe = request.form['recipe']
+            photo = request.form['img']
+            cur = db.connection.cursor()
+            cur.execute('SELECT * FROM accounts WHERE username = %s', (username,))
+            account = cur.fetchone()
+            uploader_id = account['id']
+            cur.execute('INSERT INTO uploads VALUES (NULL, %s, %s, %s)', (uploader_id, recipe, photo))
+            db.connection.commit()
+            cur.close()
+            msg = "Successful Upload"
+            # User is loggedin show upload page
+        return render_template('upload.html', username=session['username'], msg=msg)
+    else:
+        # User is not loggedin redirect to login page
+        return redirect('/')
+
 if __name__ == '__main__':
    app.run()
